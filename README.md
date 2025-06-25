@@ -18,8 +18,8 @@
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/PHS-01/Domestic_Finance_Control_System.git
-   cd Domestic_Finance_Control_System
+   git clone https://github.com/PHS-01/SIG-Finance.git
+   cd SIG-Finance
    ```
 
 2. Execute o programa:
@@ -32,7 +32,7 @@
 ## 📁 Estrutura de Pastas
 
 ```
-Domestic_Finance_Control_System/
+SIG-Finance/
 │
 ├── main.py    # Código principal do sistema
 └── README.md  # Este arquivo
