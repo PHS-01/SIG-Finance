@@ -1,37 +1,39 @@
 import os
-
-def display_header():
-    print("=" * 70)
-    print("💰 SIG-Finance - Sistema de Controle de Finanças Domésticas".center(70))
-    print("=" * 70)
-
-def display_menu():
-    print("\nEscolha uma das opções abaixo:\n")
-    print(" [1] ➕ Adicionar Receita")
-    print(" [2] ➖ Adicionar Despesa")
-    print(" [3] 📊 Exibir Relatório")
-    print(" [4] 💼 Saldo Atual")
-    print(" [0] 🚪 Sair")
-    
-    print()
-    print("=" * 70)
         
 def main():
     while True:
+        # Limpa o terminal
         os.system('clear')
-        display_header()
-        display_menu()
-    
+
+        # Menu inicial em texto
+        print("|" + ("=" * 70) + "|")
+        print("|" + "💰 SIG-Finance - Sistema de Controle de Finanças Domésticas".center(69) + "|")
+        print("|" + ("=" * 70) + "|")
+        print("|" + (" " * 70) + "|")
+        print("|" + (" " * 20) + "Escolha uma das opções abaixo:" + (" " * 20) + "|")
+        print("|" + (" " * 20) + "[1] ➕ Adicionar receita" + (" " * 26) + "|")
+        print("|" + (" " * 20) + "[2] ➖ Adicionar despesa" + (" " * 26) + "|")
+        print("|" + (" " * 20) + "[3] 📊 Exibir relatório" + (" " * 27) + "|")
+        print("|" + (" " * 20) + "[4] 💼 Ver saldo atual" + (" " * 28) + "|")
+        print("|" + (" " * 20) + "[0] 🚪 Sair do sistema" + (" " * 28) + "|")
+        print("|" + (" " * 70) + "|")
+        print("|" + ("=" * 70) + "|")
+
+        # Variável para guardar a resposta do usuário
         resp = input("\nDigite o número da opção desejada: ")
+        
+        # Limpa o terminal
+        os.system('clear')
+
         match resp:
             case "1":
-                print("\n[Receita] Função de adicionar receita ainda será implementada.")
+                print("\n[Receita] A função para adicionar receita ainda será implementada.")
             case "2":
-                print("\n[Despesa] Função de adicionar despesa ainda será implementada.")
+                print("\n[Despesa] A função para adicionar despesa ainda será implementada.")
             case "3":
-                print("\n[Relatório] Função de exibir relatório ainda será implementada.")
+                print("\n[Relatório] A função para exibir o relatório ainda será implementada.")
             case "4":
-                print("\n[Saldo] Função de exibir saldo ainda será implementada.")
+                print("\n[Saldo] A função para exibir o saldo ainda será implementada.")
             case "0":
                 print("\nSaindo do sistema... Até logo!")
                 break
