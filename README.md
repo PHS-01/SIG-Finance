@@ -38,6 +38,35 @@ SIG-Finance/
 └── README.md  # Este arquivo
 ```
 
+## Modelo de Dados
+
+### Receita
+
+| Campo         | Tipo         | Descrição                        |
+|---------------|--------------|----------------------------------|
+| id            | inteiro      | Identificador único da receita   |
+| descricao     | texto        | Descrição da receita             |
+| valor         | decimal      | Valor monetário da receita       |
+| data          | data         | Data em que a receita ocorreu    |
+| categoria_id  | inteiro      | ID da categoria associada        |
+
+### Despesa
+
+| Campo         | Tipo         | Descrição                         |
+|---------------|--------------|-----------------------------------|
+| id            | inteiro      | Identificador único da despesa    |
+| descricao     | texto        | Descrição da despesa              |
+| valor         | decimal      | Valor monetário da despesa        |
+| data          | data         | Data em que a despesa ocorreu     |
+| categoria_id  | inteiro      | ID da categoria associada         |
+
+### Categoria
+
+| Campo         | Tipo         | Descrição                              |
+|---------------|--------------|----------------------------------------|
+| id            | inteiro      | Identificador único da categoria       |
+| nome          | texto        | Nome da categoria (ex: Alimentação)    |
+
 ## 📄 Licença
 
 Este projeto **não possui licença definida**. O uso, cópia e modificação do código devem ser autorizados pelo autor.
