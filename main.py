@@ -1,6 +1,6 @@
 import os
-from income import income_menu
-from expense import expense_menu
+from Model.income import income_menu
+from Model.expense import expense_menu
 
 def main():
     while True:
