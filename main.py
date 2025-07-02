@@ -1,6 +1,19 @@
 import os
+from menu_generator import write_menu, create_menu
+
 from Model.income import income_menu
 from Model.expense import expense_menu
+
+menu = {
+    'header' : "💰 SIG-Finance - Sistema de Controle de Finanças Domésticas",
+    'options_menu' : [
+        "[1] 📥 Menu de Receitas",
+        "[2] 📤 Menu de Despesas",
+        "[3] 📈 Relatórios      ",
+        "[4] 💼 Ver saldo atual ",
+        "[0] 🚪 Sair do sistema "
+    ]
+}
 
 def main():
     while True:
@@ -8,18 +21,7 @@ def main():
         os.system('clear')
 
         # Menu inicial em texto
-        print("|" + ("=" * 70) + "|")
-        print("|" + "💰 SIG-Finance - Sistema de Controle de Finanças Domésticas".center(69) + "|")
-        print("|" + ("=" * 70) + "|")
-        print("|" + (" " * 70) + "|")
-        print("|" + (" " * 20) + "Escolha uma das opções abaixo:" + (" " * 20) + "|")
-        print("|" + (" " * 20) + "[1] 📥 Menu de Receitas" + (" " * 27) + "|")
-        print("|" + (" " * 20) + "[2] 📤 Menu de Despesas" + (" " * 27) + "|")
-        print("|" + (" " * 20) + "[3] 📈 Relatórios" + (" " * 33) + "|")
-        print("|" + (" " * 20) + "[4] 💼 Ver saldo atual" + (" " * 28) + "|")
-        print("|" + (" " * 20) + "[0] 🚪 Sair do sistema" + (" " * 28) + "|")
-        print("|" + (" " * 70) + "|")
-        print("|" + ("=" * 70) + "|")
+        write_menu(create_menu(menu["header"], menu["options_menu"], size = 70, section_separator = "=", border = "|", recoil = 1))
 
         # Variável para guardar a resposta do usuário
         resp = input("\nDigite o número da opção desejada: ")
