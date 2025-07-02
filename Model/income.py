@@ -1,4 +1,16 @@
 import os
+from menu_generator import write_menu, create_menu
+
+menu = {
+    'header' : "💰 SIG-Finance - Receitas",
+    'options_menu' : [
+        "[1] ➕ Adicionar Receita       ",
+        "[2] ➖ Remover Receita         ",
+        "[3] 📋 Listar Receitas         ",
+        "[4] 🔍 Buscar por categoria    ",
+        "[0] 🔙 Voltar ao menu principal"
+    ]
+}
 
 def income_menu():
     while True:
@@ -6,18 +18,7 @@ def income_menu():
         os.system('clear')
 
         # Menu inicial em texto
-        print("|" + ("=" * 70) + "|")
-        print("|" + "💰 SIG-Finance - Receitas".center(69) + "|")
-        print("|" + ("=" * 70) + "|")
-        print("|" + (" " * 70) + "|")
-        print("|" + (" " * 20) + "Escolha uma das opções abaixo:" + (" " * 20) + "|")
-        print("|" + (" " * 20) + "[1] ➕ Adicionar Receita" + (" " * 26) + "|")
-        print("|" + (" " * 20) + "[2] ➖ Remover Receita " + (" " * 27) + "|")
-        print("|" + (" " * 20) + "[3] 📋 Listar Receitas" + (" " * 28) + "|")
-        print("|" + (" " * 20) + "[4] 🔍 Buscar por categoria" + (" " * 23) + "|")
-        print("|" + (" " * 20) + "[0] 🔙 Voltar ao menu principal" + (" " * 19) + "|")
-        print("|" + (" " * 70) + "|")
-        print("|" + ("=" * 70) + "|")
+        write_menu(create_menu(menu["header"], menu["options_menu"], size = 70, section_separator = "=", border = "|", recoil = 1))
 
         # Variável para guardar a resposta do usuário
         resp = input("\nDigite o número da opção desejada: ")
