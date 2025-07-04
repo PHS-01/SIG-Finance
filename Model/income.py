@@ -1,5 +1,19 @@
 import os
+from datetime import datetime
 from menu_generator import write_menu, create_menu
+from CRUD import create, read, update, delete
+
+categories = [
+    {"id": 1, "name": "Alimentação"},
+    {"id": 2, "name": "Transporte"},
+    {"id": 3, "name": "Salário"},
+    {"id": 4, "name": "Investimento"}
+]
+
+incomes = [
+    {"id": 1, "description": "Salário Mensal", "value": 3000.00, "date": "2025-07-01", "category_id": 3},
+    {"id": 2, "description": "Dividendos de Ações", "value": 250.75, "date": "2025-07-03", "category_id": 4}
+]
 
 menu = {
     'header' : "💰 SIG-Finance - Receitas",
@@ -11,6 +25,44 @@ menu = {
         "[0] 🔙 Voltar ao menu principal"
     ]
 }
+
+def create_income():
+    print("[Adicionar Receita]")
+    try:
+        id = incomes[-1]['id'] + 1 
+        description = input("Descrição: ")
+        value = float(input("Valor: "))
+        date = datetime.now().strftime("%Y-%m-%d")
+        category_id = int(input("ID da Categoria: "))
+        new_income = {
+            "id": id,
+            "description": description,
+            "value": value,
+            "date": date,
+            "category_id": category_id
+        }
+        create(incomes, new_income)
+        print("\n✅ Receita adicionada com sucesso.")
+    except Exception as e:
+        print(f"\n❌ Erro ao adicionar: {e}")
+
+def list_incomes():
+    print("[Listar Receitas]")
+    data = read(incomes)
+    if not data:
+        print("Nenhuma receita cadastrada.")
+    for item in data:
+        print(f"- ID {item['id']}: {item['description']} - R$ {item['value']} em {item['date']} (Categoria {item['category_id']})")
+
+
+def delete_income():
+    print("[Remover Receita]")
+    try:
+        id = int(input("ID da Receita a remover: "))
+        delete(incomes, query=id)
+        print("\n✅ Receita removida com sucesso.")
+    except Exception as e:
+        print(f"\n❌ Erro ao remover: {e}")
 
 def income_menu():
     while True:
@@ -28,11 +80,11 @@ def income_menu():
 
         match resp:
             case "1":
-                print("\n[Receita] A funcionalidade de adicionar receita ainda será implementada.")
+                create_income()
             case "2":
-                print("\n[Receita] A funcionalidade de remover receita ainda será implementada.")
+                delete_income()
             case "3":
-                print("\n[Receita] A funcionalidade de listar receitas ainda será implementada.")
+                list_incomes()
             case "4":
                 print("\n[Receita] A funcionalidade de busca por categoria ainda será implementada.")
             case "0":

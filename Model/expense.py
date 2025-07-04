@@ -1,6 +1,19 @@
 import os
 from menu_generator import write_menu, create_menu
 
+categories = [
+    {"id": 1, "name": "Alimentação"},
+    {"id": 2, "name": "Transporte"},
+    {"id": 3, "name": "Salário"},
+    {"id": 4, "name": "Investimento"}
+]
+
+expenses = [
+    {"id": 1, "description": "Supermercado", "amount": 320.50, "date": "2025-07-02", "category_id": 1},
+    {"id": 2, "description": "Passe de Ônibus", "amount": 80.00, "date": "2025-07-01", "category_id": 2},
+    {"id": 3, "description": "Jantar Fora", "amount": 120.00, "date": "2025-07-04", "category_id": 1}
+]
+
 menu = {
     'header' : "💰 SIG-Finance - Despesa",
     'options_menu' : [
