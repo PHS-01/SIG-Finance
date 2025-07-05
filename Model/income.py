@@ -20,8 +20,9 @@ menu = {
     'options_menu' : [
         "[1] ➕ Adicionar Receita       ",
         "[2] ➖ Remover Receita         ",
-        "[3] 📋 Listar Receitas         ",
-        "[4] 🔍 Buscar por categoria    ",
+        "[3] 🔄 Atualizar Receita       ",
+        "[4] 📋 Listar Receitas         ",
+        "[5] 🔍 Buscar por categoria    ",
         "[0] 🔙 Voltar ao menu principal"
     ]
 }
@@ -50,12 +51,34 @@ def list_incomes(query = None):
     print("[Listar Receitas]")
     data = read(incomes, query)
     if not data:
-        print("Nenhuma receita cadastrada.")
+        print("❗ Nenhuma receita foi cadastrada ainda.")
     elif not query:
         for id, item in data.items():
             print(f"- ID {id} : {item['description']} - R$ {item['value']} em {item['date']} (Categoria {item['category_id']})")
     else:
         print(f"- ID {query} : {data['description']} - R$ {data['value']} em {data['date']} (Categoria {data['category_id']})")
+
+def update_incomes():
+    print("[Atualizar Receita]")
+    try:
+        id = int(input("ID da Receita a atualizar: "))
+        list_incomes(id)
+        print("Informe os novos dados da receita:")
+        description = input("Descrição: ")
+        value = float(input("Valor: "))
+        date = datetime.now().strftime("%Y-%m-%d")
+        category_id = int(input("ID da Categoria: "))
+        data_updates = {
+            "id": id,
+            "description": description,
+            "value": value,
+            "date": date,
+            "category_id": category_id
+        }
+        update(data_updates, incomes,  query=id)
+        print("\n✅ Receita atualizada com sucesso.")
+    except Exception as e:
+        print(f"\n❌ Erro ao atualizar: {e}")
 
 def delete_income():
     print("[Remover Receita]")
@@ -86,8 +109,10 @@ def income_menu():
             case "2":
                 delete_income()
             case "3":
-                list_incomes()
+                update_incomes()
             case "4":
+                list_incomes()
+            case "5":
                 print("\n[Receita] A funcionalidade de busca por categoria ainda será implementada.")
             case "0":
                 print("\nVoltando para o menu principal do sistema...")
