@@ -1,7 +1,7 @@
 # Função Create
-def create(data_list, item):
+def create(data_list, item, id):
     # Adiciona um novo item à lista de dados.
-    data_list.append(item)
+    data_list[id] = (item)
     return data_list
 
 # Função Read
@@ -10,20 +10,12 @@ def read(data_list, query = None):
     if not query:
         return data_list
     else:
-        for item in data_list:
-            if item['ID'] == query:
-                return item
-            else:
-                continue
+        return data_list[query]
 
 # Função Update
 def update(data_updates, data_list, query):
     # Atualiza os itens que correspondem à query com os valores em updates.
-    for item in data_list:
-        if item['ID'] == query:
-            item.update(data_updates)
-        else:
-            continue
+    data_list.update({query : data_updates})
     return data_list
 
 # Função Delete
@@ -33,10 +25,6 @@ def delete(data_list, query = None):
         data_list.clear()
         return data_list
     else:
-        for item in data_list:
-            if item['id'] == query:
-                data_list.pop(query-1)
-            else:
-                continue
+        del data_list[query]
 
     return data_list

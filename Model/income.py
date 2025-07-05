@@ -10,10 +10,10 @@ categories = [
     {"id": 4, "name": "Investimento"}
 ]
 
-incomes = [
-    {"id": 1, "description": "Salário Mensal", "value": 3000.00, "date": "2025-07-01", "category_id": 3},
-    {"id": 2, "description": "Dividendos de Ações", "value": 250.75, "date": "2025-07-03", "category_id": 4}
-]
+incomes = {
+    1 : {"description": "Salário Mensal", "value": 3000.00, "date": "2025-07-01", "category_id": 3},
+    2 : {"description": "Dividendos de Ações", "value": 250.75, "date": "2025-07-03", "category_id": 4}
+}
 
 menu = {
     'header' : "💰 SIG-Finance - Receitas",
@@ -29,7 +29,7 @@ menu = {
 def create_income():
     print("[Adicionar Receita]")
     try:
-        id = incomes[-1]['id'] + 1 
+        id = max(incomes.keys())+1
         description = input("Descrição: ")
         value = float(input("Valor: "))
         date = datetime.now().strftime("%Y-%m-%d")
@@ -41,19 +41,21 @@ def create_income():
             "date": date,
             "category_id": category_id
         }
-        create(incomes, new_income)
+        create(incomes, new_income, id)
         print("\n✅ Receita adicionada com sucesso.")
     except Exception as e:
         print(f"\n❌ Erro ao adicionar: {e}")
 
-def list_incomes():
+def list_incomes(query = None):
     print("[Listar Receitas]")
-    data = read(incomes)
+    data = read(incomes, query)
     if not data:
         print("Nenhuma receita cadastrada.")
-    for item in data:
-        print(f"- ID {item['id']}: {item['description']} - R$ {item['value']} em {item['date']} (Categoria {item['category_id']})")
-
+    elif not query:
+        for id, item in data.items():
+            print(f"- ID {id} : {item['description']} - R$ {item['value']} em {item['date']} (Categoria {item['category_id']})")
+    else:
+        print(f"- ID {query} : {data['description']} - R$ {data['value']} em {data['date']} (Categoria {data['category_id']})")
 
 def delete_income():
     print("[Remover Receita]")
