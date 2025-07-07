@@ -29,13 +29,13 @@ def create_category(data_category):
 def list_category(data_category, query=None):
     print("[Listar Categoria]")
 
-    data = list(data_category, query)
+    data = read(data_category, query)
 
     if not query:
-        for id, item in data:
+        for id, item in data.items():
             print(f"- ID {id} : {item['name']}")
     else:
-        print(f"- ID {query} : {data[query]['name']}")
+        print(f"- ID {query} : {data['name']}")
 
 def update_category(data_category):
     print("[Atualizar Categoria]")
@@ -80,11 +80,11 @@ def category_menu(categories):
             case "1":
                 create_category(categories)
             case "2":
-                delete_category(Categoria, )
+                delete_category(categories)
             case "3":
-                print()
+                update_category(categories)
             case "4":
-                print()
+                list_category(categories)
             case "0":
                 print("\nVoltando para o menu principal do sistema...")
                 break
