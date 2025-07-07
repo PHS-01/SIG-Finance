@@ -1,6 +1,6 @@
 import os
-from menu_generator import write_menu, create_menu
-from transaction_controller import list_transactions
+from Controller.menu_generator import write_menu, create_menu
+from Controller.transaction_controller import list_transactions
 
 menu = {
     'header' : "💰 SIG-Finance - Relatórios",

@@ -1,5 +1,5 @@
 from datetime import datetime
-from CRUD import create, read, update, delete
+from Controller.CRUD import create, read, update, delete
 
 # Função para traduzir os tipos para português
 def translate_type(type):
