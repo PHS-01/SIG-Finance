@@ -1,31 +1,20 @@
 import os
 from menu_generator import write_menu, create_menu
-
-categories = [
-    {"id": 1, "name": "Alimentação"},
-    {"id": 2, "name": "Transporte"},
-    {"id": 3, "name": "Salário"},
-    {"id": 4, "name": "Investimento"}
-]
-
-expenses = [
-    {"id": 1, "description": "Supermercado", "amount": 320.50, "date": "2025-07-02", "category_id": 1},
-    {"id": 2, "description": "Passe de Ônibus", "amount": 80.00, "date": "2025-07-01", "category_id": 2},
-    {"id": 3, "description": "Jantar Fora", "amount": 120.00, "date": "2025-07-04", "category_id": 1}
-]
+from transaction_controller import create_transaction, list_transactions, update_transaction, delete_transaction
 
 menu = {
     'header' : "💰 SIG-Finance - Despesa",
     'options_menu' : [
         "[1] ➕ Adicionar Despesa       ",
         "[2] ➖ Remover Despesa         ",
-        "[3] 📋 Listar Despesas         ",
-        "[4] 🔍 Buscar por categoria    ",
+        "[3] 🔄 Atualizar Despesa       ",
+        "[4] 📋 Listar Despesas         ",
+        "[5] 🔍 Buscar por categoria    ",
         "[0] 🔙 Voltar ao menu principal"
     ]
 }
 
-def expense_menu():
+def expense_menu(transactions):
     while True:
         # Limpa o terminal
         os.system('clear')
@@ -41,12 +30,14 @@ def expense_menu():
 
         match resp:
             case "1":
-                print("\n[Despesa] A funcionalidade de adicionar despesa ainda será implementada.")
+                create_transaction(transactions, "expense")
             case "2":
-                print("\n[Despesa] A funcionalidade de remover despesa ainda será implementada.")
+                delete_transaction(transactions, "expense")
             case "3":
-                print("\n[Despesa] A funcionalidade de listar despesas ainda será implementada.")
+                update_transaction(transactions, "expense")
             case "4":
+                list_transactions(transactions, "expense")
+            case "5":
                 print("\n[Despesa] A funcionalidade de busca por categoria ainda será implementada.")
             case "0":
                 print("\nVoltando para o menu principal do sistema...")

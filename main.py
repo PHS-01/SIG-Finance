@@ -3,6 +3,22 @@ from menu_generator import write_menu, create_menu
 
 from Model.income import income_menu
 from Model.expense import expense_menu
+from Model.report import report_menu
+
+categories = {
+    1 : {"name": "Alimentação"},
+    2 : {"name": "Transporte"},
+    3 : {"name": "Salário"},
+    4 : {"name": "Investimento"}
+}
+
+transactions = {
+    1 : {"type": "income","description": "Salário Mensal", "value": 3000.00, "date": "2025-07-01", "category_id": 3},
+    2 : {"type": "income", "description": "Dividendos de Ações", "value": 250.75, "date": "2025-07-03", "category_id": 4},
+    3 : {"type": "expense","description": "Supermercado", "value": 320.50, "date": "2025-07-02", "category_id": 1},
+    4 : {"type": "expense","description": "Passe de Ônibus", "value": 80.00, "date": "2025-07-01", "category_id": 2},
+    5 : {"type": "expense","description": "Jantar Fora", "value": 120.00, "date": "2025-07-04", "category_id": 1}
+}
 
 menu = {
     'header' : "💰 SIG-Finance - Sistema de Controle de Finanças Domésticas",
@@ -32,12 +48,13 @@ def main():
         match resp:
             case "1":
                 print("\n➡️ Submenu de Receitas ainda será implementado.")
-                income_menu()
+                income_menu(transactions)
             case "2":
                 print("\n➡️ Submenu de Despesas ainda será implementado.")
-                expense_menu()
+                expense_menu(transactions)
             case "3":
                 print("\n📊 Relatórios ainda serão implementados.")
+                report_menu(transactions)
             case "4":
                 print("\n[Saldo] A função para exibir o saldo ainda será implementada.")
             case "0":

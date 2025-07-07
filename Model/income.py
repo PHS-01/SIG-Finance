@@ -1,19 +1,6 @@
 import os
-from datetime import datetime
 from menu_generator import write_menu, create_menu
-from CRUD import create, read, update, delete
-
-categories = [
-    {"id": 1, "name": "Alimentação"},
-    {"id": 2, "name": "Transporte"},
-    {"id": 3, "name": "Salário"},
-    {"id": 4, "name": "Investimento"}
-]
-
-incomes = {
-    1 : {"description": "Salário Mensal", "value": 3000.00, "date": "2025-07-01", "category_id": 3},
-    2 : {"description": "Dividendos de Ações", "value": 250.75, "date": "2025-07-03", "category_id": 4}
-}
+from transaction_controller import create_transaction, list_transactions, update_transaction, delete_transaction
 
 menu = {
     'header' : "💰 SIG-Finance - Receitas",
@@ -27,69 +14,7 @@ menu = {
     ]
 }
 
-def create_income():
-    print("[Adicionar Receita]")
-    try:
-        id = max(incomes.keys())+1
-        description = input("Descrição: ")
-        value = float(input("Valor: "))
-        date = datetime.now().strftime("%Y-%m-%d")
-        category_id = int(input("ID da Categoria: "))
-        new_income = {
-            "id": id,
-            "description": description,
-            "value": value,
-            "date": date,
-            "category_id": category_id
-        }
-        create(incomes, new_income, id)
-        print("\n✅ Receita adicionada com sucesso.")
-    except Exception as e:
-        print(f"\n❌ Erro ao adicionar: {e}")
-
-def list_incomes(query = None):
-    print("[Listar Receitas]")
-    data = read(incomes, query)
-    if not data:
-        print("❗ Nenhuma receita foi cadastrada ainda.")
-    elif not query:
-        for id, item in data.items():
-            print(f"- ID {id} : {item['description']} - R$ {item['value']} em {item['date']} (Categoria {item['category_id']})")
-    else:
-        print(f"- ID {query} : {data['description']} - R$ {data['value']} em {data['date']} (Categoria {data['category_id']})")
-
-def update_incomes():
-    print("[Atualizar Receita]")
-    try:
-        id = int(input("ID da Receita a atualizar: "))
-        list_incomes(id)
-        print("Informe os novos dados da receita:")
-        description = input("Descrição: ")
-        value = float(input("Valor: "))
-        date = datetime.now().strftime("%Y-%m-%d")
-        category_id = int(input("ID da Categoria: "))
-        data_updates = {
-            "id": id,
-            "description": description,
-            "value": value,
-            "date": date,
-            "category_id": category_id
-        }
-        update(data_updates, incomes,  query=id)
-        print("\n✅ Receita atualizada com sucesso.")
-    except Exception as e:
-        print(f"\n❌ Erro ao atualizar: {e}")
-
-def delete_income():
-    print("[Remover Receita]")
-    try:
-        id = int(input("ID da Receita a remover: "))
-        delete(incomes, query=id)
-        print("\n✅ Receita removida com sucesso.")
-    except Exception as e:
-        print(f"\n❌ Erro ao remover: {e}")
-
-def income_menu():
+def income_menu(transactions):
     while True:
         # Limpa o terminal
         os.system('clear')
@@ -105,13 +30,13 @@ def income_menu():
 
         match resp:
             case "1":
-                create_income()
+                create_transaction(transactions, "income")
             case "2":
-                delete_income()
+                delete_transaction(transactions,"income")
             case "3":
-                update_incomes()
+                update_transaction(transactions, "income")
             case "4":
-                list_incomes()
+                list_transactions(transactions, "income")
             case "5":
                 print("\n[Receita] A funcionalidade de busca por categoria ainda será implementada.")
             case "0":
