@@ -7,33 +7,29 @@ from Model.expense import expense_menu
 from Model.report import report_menu
 from Model.category import category_menu
 
-# categories = {
-#     1 : {"name": "Alimentação"},
-#     2 : {"name": "Transporte"},
-#     3 : {"name": "Salário"},
-#     4 : {"name": "Investimento"}
-# }
-
-# transactions = {
-#     1 : {"type": "income","description": "Salário Mensal", "value": 3000.00, "date": "2025-07-01", "category_id": 3},
-#     2 : {"type": "income", "description": "Dividendos de Ações", "value": 250.75, "date": "2025-07-03", "category_id": 4},
-#     3 : {"type": "expense","description": "Supermercado", "value": 320.50, "date": "2025-07-02", "category_id": 1},
-#     4 : {"type": "expense","description": "Passe de Ônibus", "value": 80.00, "date": "2025-07-01", "category_id": 2},
-#     5 : {"type": "expense","description": "Jantar Fora", "value": 120.00, "date": "2025-07-04", "category_id": 1}
-# }
-
-categories = {}
+categories = {
+    1 : {"name": "Alimentação"},
+    2 : {"name": "Transporte"},
+    3 : {"name": "Salário"},
+    4 : {"name": "Investimento"}
+}
 try:
   arq_categories = open("Database/categories.dat", "rb")
-  categories = pickle.load(arq_categories)
+  categories += pickle.load(arq_categories)
 except:
   arq_categories = open("Database/categories.dat", "wb")
 arq_categories.close()
 
-transactions = {}
+transactions = {
+    1 : {"type": "income","description": "Salário Mensal", "value": 3000.00, "date": "2025-07-01", "category_id": 3},
+    2 : {"type": "income", "description": "Dividendos de Ações", "value": 250.75, "date": "2025-07-03", "category_id": 4},
+    3 : {"type": "expense","description": "Supermercado", "value": 320.50, "date": "2025-07-02", "category_id": 1},
+    4 : {"type": "expense","description": "Passe de Ônibus", "value": 80.00, "date": "2025-07-01", "category_id": 2},
+    5 : {"type": "expense","description": "Jantar Fora", "value": 120.00, "date": "2025-07-04", "category_id": 1}
+}
 try:
   arq_transactions = open("Database/transactions.dat", "rb")
-  transactions = pickle.load(arq_transactions)
+  transactions += pickle.load(arq_transactions)
 except:
   arq_transactions = open("Database/transactions.dat", "wb")
 arq_transactions.close()
