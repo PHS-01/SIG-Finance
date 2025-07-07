@@ -1,32 +1,49 @@
 import os
-from menu_generator import write_menu, create_menu
+import pickle
+from Controller.menu_generator import write_menu, create_menu
 
 from Model.income import income_menu
 from Model.expense import expense_menu
 from Model.report import report_menu
 from Model.category import category_menu
 
-categories = {
-    1 : {"name": "Alimentação"},
-    2 : {"name": "Transporte"},
-    3 : {"name": "Salário"},
-    4 : {"name": "Investimento"}
-}
+# categories = {
+#     1 : {"name": "Alimentação"},
+#     2 : {"name": "Transporte"},
+#     3 : {"name": "Salário"},
+#     4 : {"name": "Investimento"}
+# }
 
-transactions = {
-    1 : {"type": "income","description": "Salário Mensal", "value": 3000.00, "date": "2025-07-01", "category_id": 3},
-    2 : {"type": "income", "description": "Dividendos de Ações", "value": 250.75, "date": "2025-07-03", "category_id": 4},
-    3 : {"type": "expense","description": "Supermercado", "value": 320.50, "date": "2025-07-02", "category_id": 1},
-    4 : {"type": "expense","description": "Passe de Ônibus", "value": 80.00, "date": "2025-07-01", "category_id": 2},
-    5 : {"type": "expense","description": "Jantar Fora", "value": 120.00, "date": "2025-07-04", "category_id": 1}
-}
+# transactions = {
+#     1 : {"type": "income","description": "Salário Mensal", "value": 3000.00, "date": "2025-07-01", "category_id": 3},
+#     2 : {"type": "income", "description": "Dividendos de Ações", "value": 250.75, "date": "2025-07-03", "category_id": 4},
+#     3 : {"type": "expense","description": "Supermercado", "value": 320.50, "date": "2025-07-02", "category_id": 1},
+#     4 : {"type": "expense","description": "Passe de Ônibus", "value": 80.00, "date": "2025-07-01", "category_id": 2},
+#     5 : {"type": "expense","description": "Jantar Fora", "value": 120.00, "date": "2025-07-04", "category_id": 1}
+# }
+
+categories = {}
+try:
+  arq_categories = open("Database/categories.dat", "rb")
+  categories = pickle.load(arq_categories)
+except:
+  arq_categories = open("Database/categories.dat", "wb")
+arq_categories.close()
+
+transactions = {}
+try:
+  arq_transactions = open("Database/transactions.dat", "rb")
+  transactions = pickle.load(arq_transactions)
+except:
+  arq_transactions = open("Database/transactions.dat", "wb")
+arq_transactions.close()
 
 menu = {
     'header' : "💰 SIG-Finance - Sistema de Controle de Finanças Domésticas",
     'options_menu' : [
         "[1] 📥 Menu de Receitas       ",
         "[2] 📤 Menu de Despesas       ",
-        "[3] 🗂️ Gerenciar Categorias   ",
+        "[3] 📁 Gerenciar Categorias   ",
         "[4] 📈 Relatórios             ",
         "[5] 💼 Ver saldo atual        ",
         "[0] 🚪 Sair do sistema        "
@@ -71,3 +88,13 @@ def main():
         input("\nPressione Enter para continuar...")
 
 main()
+
+### Gravando os dados no arquivo
+
+arq_categories = open("Database/categories.dat", "wb")
+pickle.dump(categories, arq_categories)
+arq_categories.close()
+
+arq_transactions = open("Database/transactions.dat", "wb")
+pickle.dump(transactions, arq_transactions)
+arq_transactions.close()

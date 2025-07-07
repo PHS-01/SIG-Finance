@@ -1,5 +1,6 @@
 import os
-from menu_generator import write_menu, create_menu
+from Controller.menu_generator import write_menu, create_menu
+from Controller.CRUD import create, read, update, delete
 
 menu = {
     'header' : "💰 SIG-Finance - Categorias",
@@ -11,6 +12,55 @@ menu = {
         "[0] 🔙 Voltar ao menu principal"
     ]
 }
+
+def create_category(data_category):
+    print("[Adicionar Categoria]")
+    try:
+        id = max(data_category.keys(), default=0) + 1
+        name = input("Nome: ")
+        new_data = {
+            "name": name
+        }
+        create(data_category, new_data, id)
+        print("\n✅ Categoria adicionada com sucesso.")
+    except Exception as e:
+        print(f"\n❌ Erro ao adicionar: {e}")
+
+def list_category(data_category, query=None):
+    print("[Listar Categoria]")
+
+    data = list(data_category, query)
+
+    if not query:
+        for id, item in data:
+            print(f"- ID {id} : {item['name']}")
+    else:
+        print(f"- ID {query} : {data[query]['name']}")
+
+def update_category(data_category):
+    print("[Atualizar Categoria]")
+    try:
+        id = int(input(f"ID da Categoria a atualizar: "))
+        list_category(data_category, id)
+        print(f"Informe os novos dados da Categoria {id}:")
+        name = input("Nome: ")
+        data_updates = {
+            "name": name
+        }
+        update(data_updates, data_category, query=id)
+        print("\n✅ Categoria atualizada com sucesso.")
+    except Exception as e:
+        print(f"\n❌ Erro ao atualizar: {e}")
+
+def delete_category(data_category):
+    print("[Remover Categoria]")
+    try:
+        id = int(input("ID da Categoriaa remover: "))
+        delete(data_category, query=id)
+        print(f"\n✅ Categoria removida com sucesso.")
+
+    except Exception as e:
+        print(f"\n❌ Erro ao remover: {e}")
 
 def category_menu(categories):
     while True:
@@ -28,9 +78,9 @@ def category_menu(categories):
 
         match resp:
             case "1":
-                print()
+                create_category(categories)
             case "2":
-                print()
+                delete_category(Categoria, )
             case "3":
                 print()
             case "4":
