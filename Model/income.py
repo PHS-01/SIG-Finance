@@ -14,7 +14,7 @@ menu = {
     ]
 }
 
-def income_menu(transactions):
+def income_menu(transactions, categories):
     while True:
         # Limpa o terminal
         os.system('clear')
@@ -30,13 +30,13 @@ def income_menu(transactions):
 
         match resp:
             case "1":
-                create_transaction(transactions, "income")
+                create_transaction(transactions, "income", categories)
             case "2":
                 delete_transaction(transactions,"income")
             case "3":
                 update_transaction(transactions, "income")
             case "4":
-                list_transactions(transactions, "income")
+                list_transactions(transactions, "income", categories)
             case "5":
                 print("\n[Receita] A funcionalidade de busca por categoria ainda será implementada.")
             case "0":

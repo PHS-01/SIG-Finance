@@ -14,7 +14,7 @@ menu = {
     ]
 }
 
-def expense_menu(transactions):
+def expense_menu(transactions, categories):
     while True:
         # Limpa o terminal
         os.system('clear')
@@ -36,7 +36,7 @@ def expense_menu(transactions):
             case "3":
                 update_transaction(transactions, "expense")
             case "4":
-                list_transactions(transactions, "expense")
+                list_transactions(transactions, "expense", categories)
             case "5":
                 print("\n[Despesa] A funcionalidade de busca por categoria ainda será implementada.")
             case "0":

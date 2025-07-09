@@ -1,5 +1,7 @@
+import os
 from datetime import datetime
 from Controller.CRUD import create, read, update, delete
+from Validation.category_validation import existence_validation
 
 # Função para traduzir os tipos para português
 def translate_type(type):
@@ -8,7 +10,7 @@ def translate_type(type):
         "expense": "despesa"
     }.get(type, type)
 
-def create_transaction(data_transaction, type):
+def create_transaction(data_transaction, type, categories):
     translated_type = translate_type(type)
     print(f"[Adicionar {translated_type.capitalize()}]")
     try:
@@ -17,6 +19,11 @@ def create_transaction(data_transaction, type):
         value = float(input("Valor: "))
         date = datetime.now().strftime("%Y-%m-%d")
         category_id = int(input("ID da Categoria: "))
+        while existence_validation(category_id, categories):
+            # Limpa o terminal
+            os.system('clear')
+            print(f"A categoria {category_id} não existe! Digite Novamente.")
+            category_id = int(input("ID da Categoria: "))
         new_data = {
             "type": type,
             "description": description,
@@ -29,14 +36,14 @@ def create_transaction(data_transaction, type):
     except Exception as e:
         print(f"\n❌ Erro ao adicionar: {e}")
 
-def list_transactions(data_transaction, type, query=None):
+def list_transactions(data_transaction, type, categories ,query=None):
     translated_type = translate_type(type)
     print(f"[Listar {translated_type.capitalize()}]")
     data = read(data_transaction, query)
 
     if query:
         if data and data.get("type") == type:
-            print(f"- ID {query} : {data['description']} - R$ {data['value']} em {data['date']} (Categoria {data['category_id']})")
+            print(f"- ID {query} : {data['description']} - R$ {data['value']} em {data['date']} - Categoria : {categories[item['category_id']]["name"]})")
         else:
             print(f"❗ Nenhuma {translated_type} com ID {query} foi encontrada.")
     else:
@@ -44,7 +51,7 @@ def list_transactions(data_transaction, type, query=None):
         for id, item in data.items():
             if item.get("type") == type:
                 found = True
-                print(f"- ID {id} : {item['description']} - R$ {item['value']} em {item['date']} (Categoria {item['category_id']})")
+                print(f"- ID {id} : {item['description']} - R$ {item['value']} em {item['date']} - Categoria : {categories[item['category_id']]["name"]})")
         if not found:
             print(f"❗ Nenhuma {translated_type} foi cadastrada ainda.")
 
