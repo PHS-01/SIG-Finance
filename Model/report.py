@@ -1,6 +1,7 @@
 import os
-from Controller.menu_generator import write_menu, create_menu
+from Controller.menu_generator import write_menu, create_menu, create_menu_list
 from Controller.transaction_controller import list_transactions
+from Controller.report_controller import report_category, report_period, report_total_balance
 
 menu = {
     'header' : "💰 SIG-Finance - Relatórios",
@@ -14,7 +15,7 @@ menu = {
     ]
 }
 
-def report_menu(transactions):
+def report_menu(transactions, categories):
     while True:
         # Limpa o terminal
         os.system('clear')
@@ -30,15 +31,45 @@ def report_menu(transactions):
 
         match resp:
             case "1":
-                print()
+                data_list = report_category(transactions, categories)
+                menu_list = {
+                    "header" : ["Categoria", "Total"],
+                    "options_menu" : data_list["income"],
+                    "footer" : ["Total", data_list["income"]["Total"]],
+                }
+                print("\nReceitas: \n")
+                write_menu(create_menu_list(menu_list["header"], menu_list["options_menu"], menu_list["footer"], 50, "-", "|"))
+
+                menu_list = {
+                    "header" : ["Categoria", "Total"],
+                    "options_menu" : data_list["expense"],
+                    "footer" : ["Total", data_list["expense"]["Total"]],
+                }
+                print("\nDespesas: \n")
+                write_menu(create_menu_list(menu_list["header"], menu_list["options_menu"], menu_list["footer"], 50, "-", "|"))
             case "2":
-                print()
+                data_list = report_period(transactions)
+                menu_list = {
+                    "header" : ["Período", "Total"],
+                    "options_menu" : data_list["income"],
+                    "footer" : ["Total", data_list["income"]["Total"]],
+                }
+                print("\nReceitas: \n")
+                write_menu(create_menu_list(menu_list["header"], menu_list["options_menu"], menu_list["footer"], 50, "-", "|"))
+
+                menu_list = {
+                    "header" : ["Período", "Total"],
+                    "options_menu" : data_list["expense"],
+                    "footer" : ["Total", data_list["expense"]["Total"]],
+                }
+                print("\nDespesas: \n")
+                write_menu(create_menu_list(menu_list["header"], menu_list["options_menu"], menu_list["footer"], 50, "-", "|"))
             case "3":
                 list_transactions(transactions, "income")
             case "4":
                 list_transactions(transactions, "expense")
             case "5":
-                print()
+                print(report_total_balance(transactions))
             case "0":
                 print("\nVoltando para o menu principal do sistema...")
                 break

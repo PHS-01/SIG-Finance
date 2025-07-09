@@ -21,11 +21,16 @@ except:
 arq_categories.close()
 
 transactions = {
-    1 : {"type": "income","description": "Salário Mensal", "value": 3000.00, "date": "2025-07-01", "category_id": 3},
-    2 : {"type": "income", "description": "Dividendos de Ações", "value": 250.75, "date": "2025-07-03", "category_id": 4},
-    3 : {"type": "expense","description": "Supermercado", "value": 320.50, "date": "2025-07-02", "category_id": 1},
-    4 : {"type": "expense","description": "Passe de Ônibus", "value": 80.00, "date": "2025-07-01", "category_id": 2},
-    5 : {"type": "expense","description": "Jantar Fora", "value": 120.00, "date": "2025-07-04", "category_id": 1}
+    1: {"type": "income",  "description": "Salário Mensal",        "value": 3000.00, "date": "2025-07-01", "category_id": 3},
+    2: {"type": "income",  "description": "Dividendos de Ações",   "value": 250.75,  "date": "2025-07-10", "category_id": 4},
+    3: {"type": "expense", "description": "Supermercado",          "value": 320.50,  "date": "2025-07-05", "category_id": 1},
+    4: {"type": "expense", "description": "Passe de Ônibus",       "value": 80.00,   "date": "2025-06-02", "category_id": 2},
+    5: {"type": "expense", "description": "Jantar Fora",           "value": 120.00,  "date": "2025-06-15", "category_id": 1},
+    6: {"type": "income",  "description": "Freelance Design",      "value": 900.00,  "date": "2025-06-20", "category_id": 3},
+    7: {"type": "expense", "description": "Combustível",           "value": 150.00,  "date": "2025-06-18", "category_id": 2},
+    8: {"type": "income",  "description": "Rendimento Poupança",   "value": 45.30,   "date": "2025-05-25", "category_id": 4},
+    9: {"type": "expense", "description": "Almoço com Amigos",     "value": 85.00,   "date": "2025-05-28", "category_id": 1},
+   10: {"type": "expense", "description": "Uber",                  "value": 60.00,   "date": "2025-05-30", "category_id": 2}
 }
 try:
   arq_transactions = open("Database/transactions.dat", "rb")
@@ -72,7 +77,7 @@ def main():
                 category_menu(categories)
             case "4":
                 print("\n📊 Relatórios ainda serão implementados.")
-                report_menu(transactions)
+                report_menu(transactions, categories)
             case "5":
                 print("\n[Saldo] A função para exibir o saldo ainda será implementada.")
             case "0":
