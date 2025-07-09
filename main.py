@@ -1,6 +1,7 @@
 import os
 import pickle
 from Controller.menu_generator import write_menu, create_menu
+from Controller.report_controller import report_total_balance
 
 from Model.income import income_menu
 from Model.expense import expense_menu
@@ -69,17 +70,17 @@ def main():
         match resp:
             case "1":
                 print("\n➡️ Submenu de Receitas ainda será implementado.")
-                income_menu(transactions)
+                income_menu(transactions, categories)
             case "2":
                 print("\n➡️ Submenu de Despesas ainda será implementado.")
-                expense_menu(transactions)
+                expense_menu(transactions, categories)
             case "3":
                 category_menu(categories)
             case "4":
                 print("\n📊 Relatórios ainda serão implementados.")
                 report_menu(transactions, categories)
             case "5":
-                print("\n[Saldo] A função para exibir o saldo ainda será implementada.")
+                print(report_total_balance(transactions))
             case "0":
                 print("\n👋 Saindo do sistema... Até logo!")
                 break

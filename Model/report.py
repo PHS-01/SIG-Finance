@@ -65,9 +65,9 @@ def report_menu(transactions, categories):
                 print("\nDespesas: \n")
                 write_menu(create_menu_list(menu_list["header"], menu_list["options_menu"], menu_list["footer"], 50, "-", "|"))
             case "3":
-                list_transactions(transactions, "income")
+                list_transactions(transactions, "income", categories)
             case "4":
-                list_transactions(transactions, "expense")
+                list_transactions(transactions, "expense", categories)
             case "5":
                 print(report_total_balance(transactions))
             case "0":
